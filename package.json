@@ -1,0 +1,24 @@
+{
+  "name": "api",
+  "version": "1.0.0",
+  "description": "api-upchallenge",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VieiraVitor/api-upchallenge.git"
+  },
+  "author": "Vitor Vieira",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VieiraVitor/api-upchallenge/issues"
+  },
+  "homepage": "https://github.com/VieiraVitor/api-upchallenge#readme",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "express": "^4.17.1",
+    "http": "0.0.1-security"
+  }
+}
