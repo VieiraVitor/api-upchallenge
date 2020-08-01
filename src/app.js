@@ -3,13 +3,16 @@ const bodyParser = require('body-parser');
 
 const app = express();
 
-const index = require('./routes/index');
-const validate = require('./routes/validate');
+//Carrega as rotas
+const indexRoute = require('./routes/index-route');
+const validateRoute = require('./routes/validate-route');
 
 app.use(bodyParser.json());
-app.unsubscribe(bodyParser.urlencoded({extended: false}))
+app.unsubscribe(bodyParser.urlencoded({
+    extended: false
+}));
 
-app.use('/', index);
-app.use('/validate', validate)
+app.use('/', indexRoute);
+app.use('/validate', validateRoute);
 
 module.exports = app;
