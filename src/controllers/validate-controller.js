@@ -12,5 +12,4 @@ exports.validate = (req, res, next) => {
             score: scoreTransaction
         }
     );
-
 };

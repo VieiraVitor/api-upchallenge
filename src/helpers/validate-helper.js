@@ -1,3 +1,5 @@
+const stateByDDD = require('./state-helper')
+
 const resultTransaction = function validateTransaction(dataTransaction) {
     const customer = dataTransaction.customer
     let score = 0;
@@ -5,15 +7,16 @@ const resultTransaction = function validateTransaction(dataTransaction) {
     // validar ip location da transação e state do customer
     console.log(customer.state)
     console.log(dataTransaction.ip_location)
-    if (customer.state !== dataTransaction.ip_location) {
-        // TODO implementar lógica pra aumentar o score
-        score += 100;
-        console.log(score)
-    }
 
     if (customer.name !== dataTransaction.card_hold_name) {
         // TODO implementar lógica pra aumentar o score
         score += 115;
+        console.log(score)
+    }
+    
+    if (customer.state !== dataTransaction.ip_location) {
+        // TODO implementar lógica pra aumentar o score
+        score += 100;
         console.log(score)
     }
 
@@ -39,6 +42,17 @@ function validateState(phoneCustomer, locationTransaction) {
         return true
     } else {
         return false
+    }
+}
+
+function findStateByDDD(ddd) {
+    for (let state in stateByDDD) {
+        stateByDDD.hasOwnProperty(state);
+        {
+            if (state === ddd) {
+                return stateByDDD[state];
+            }
+        }
     }
 }
 
