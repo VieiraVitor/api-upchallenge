@@ -4,34 +4,50 @@ const resultTransaction = function validateTransaction(dataTransaction) {
     const customer = dataTransaction.customer
     let score = 0;
 
-    // validar ip location da transação e state do customer
     if (customer.name !== dataTransaction.card_hold_name) {
         // TODO implementar lógica pra aumentar o score
-        score += 115;
+        score += 20;
         console.log(score)
     }
 
+    // Validar ip location da transação e state do customer
     if (customer.state !== dataTransaction.ip_location) {
         // TODO implementar lógica pra aumentar o score
-        score += 100;
+        score += 15;
         console.log(score)
     }
 
+    // Valida o DDD do customer com o UF do ip_location da transação
     if (!validateState(customer.phone, dataTransaction.ip_location)) {
         // TODO implementar lógica pra aumentar o score
-        score += 25;
+        score += 10;
+        console.log(score)
+    }
+
+    // Valida o DDD do customer com o UF do state do próprio customer
+    if (!validateState(customer.phone, customer.state)) {
+        // TODO implementar lógica pra aumentar o score
+        score += 15;
         console.log(score)
     }
 
     if (!validatePhone(customer.phone)) {
         // TODO implementar lógica pra aumentar o score
-        score += 40;
+        score += 15;
         console.log(score)
     }
 
     if (!validatePayment(dataTransaction.paid_at)) {
-        console.log("pagamento maior que data atual");
-        score += 66;
+        console.log("data de pagamento maior que data atual");
+        score += 20;
+    }
+
+    // Verificar se valor da transação é maior que zero
+
+    // Verifica se o cliente é maior de idade
+    if (!validateBirthDate(customer.birth_date)) {
+        console.log('menor que 18 anos');
+        score += 5;
     }
 
     return score;
@@ -89,4 +105,21 @@ function validatePayment(paidAtTransaction) {
     }
 }
 
+function validateBirthDate(birthDateCustomer) {
+    const ageCustomer = calcAge(birthDateCustomer);
+
+    if (ageCustomer >= 18) {
+        return true
+    } else {
+        return false
+    }
+}
+
+calcAge = (dateString) => {
+    let birthday = +new Date(dateString);
+    let age = ((Date.now() - birthday) / (31557600000));
+    console.log(age);
+    return age;
+}
+  
 module.exports = resultTransaction;
