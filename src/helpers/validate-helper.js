@@ -1,9 +1,21 @@
 const stateByDDD = require('./state-helper')
 
-const resultTransaction = function validateTransaction(dataTransaction) {
+const resultTransactions = function validateTransactions(dataTransactions) {
+    let results = [];
+    for (let transaction in dataTransactions) {
+        scoreTransaction = validateTransaction(dataTransactions[transaction]);
+        idTransaction = dataTransactions[transaction].customer.id;
+        results.push({
+            id: idTransaction,
+            score: scoreTransaction
+        })
+    }
+    return results;
+}
+
+function validateTransaction(dataTransaction) {
     const customer = dataTransaction.customer
     let score = 0;
-
     if (customer.name !== dataTransaction.card_hold_name) {
         // TODO implementar lógica pra aumentar o score
         score += 20;
@@ -121,5 +133,5 @@ calcAge = (dateString) => {
     console.log(age);
     return age;
 }
-  
-module.exports = resultTransaction;
+
+module.exports = resultTransactions;
