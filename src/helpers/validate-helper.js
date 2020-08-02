@@ -13,7 +13,7 @@ const resultTransaction = function validateTransaction(dataTransaction) {
         score += 115;
         console.log(score)
     }
-    
+
     if (customer.state !== dataTransaction.ip_location) {
         // TODO implementar lógica pra aumentar o score
         score += 100;
@@ -23,6 +23,12 @@ const resultTransaction = function validateTransaction(dataTransaction) {
     if (!validateState(customer.phone, dataTransaction.ip_location)) {
         // TODO implementar lógica pra aumentar o score
         score += 25;
+        console.log(score)
+    }
+
+    if (!validatePhone(customer.phone)) {
+        // TODO implementar lógica pra aumentar o score
+        score += 40;
         console.log(score)
     }
 
@@ -53,6 +59,17 @@ function findStateByDDD(ddd) {
                 return stateByDDD[state];
             }
         }
+    }
+}
+
+function validatePhone(phoneCustomer) {
+    if (/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}/g.test(phoneCustomer)) {
+        console.log('valido')
+        return true
+    }
+    else {
+        console.log('invalido')
+        return false
     }
 }
 
