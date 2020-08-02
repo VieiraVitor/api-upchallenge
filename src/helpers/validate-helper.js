@@ -1,7 +1,12 @@
+'use strict';
+
 const stateByDDD = require('./state-helper')
 
 const resultTransactions = function validateTransactions(dataTransactions) {
     let results = [];
+    let scoreTransaction = 0;
+    let idTransaction = '';
+
     for (let transaction in dataTransactions) {
         scoreTransaction = validateTransaction(dataTransactions[transaction]);
         idTransaction = dataTransactions[transaction].customer.id;
@@ -10,6 +15,7 @@ const resultTransactions = function validateTransactions(dataTransactions) {
             score: scoreTransaction
         })
     }
+    
     return results;
 }
 
@@ -54,6 +60,8 @@ function validateTransaction(dataTransaction) {
         console.log('menor que 18 anos');
         score += 5;
     }
+
+    score > 100 ? score = 100 : score = score
 
     return score;
 }
@@ -116,7 +124,7 @@ function validateBirthDate(birthDateCustomer) {
     }
 }
 
-calcAge = (dateString) => {
+function calcAge(dateString) {
     let birthday = +new Date(dateString);
     let age = ((Date.now() - birthday) / (31557600000));
     return age;

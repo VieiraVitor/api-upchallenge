@@ -1,3 +1,5 @@
+'use strict';
+
 const stateByDDD = {
     "11": "SP",
     "12": "SP",
