@@ -17,44 +17,37 @@ function validateTransaction(dataTransaction) {
     const customer = dataTransaction.customer
     let score = 0;
     if (customer.name !== dataTransaction.card_hold_name) {
-        // TODO implementar lógica pra aumentar o score
-        score += 20;
-        console.log(score)
+        console.log("nome diferente do cartão");
+        score += 22;
     }
 
     // Validar ip location da transação e state do customer
     if (customer.state !== dataTransaction.ip_location) {
-        // TODO implementar lógica pra aumentar o score
-        score += 15;
-        console.log(score)
+        console.log("state do customer diferente da localização da transação");
+        score += 13;
     }
 
     // Valida o DDD do customer com o UF do ip_location da transação
     if (!validateState(customer.phone, dataTransaction.ip_location)) {
-        // TODO implementar lógica pra aumentar o score
+        console.log("ddd do customer diferente do ddd referente a UF da localização da transação");
         score += 10;
-        console.log(score)
     }
 
     // Valida o DDD do customer com o UF do state do próprio customer
     if (!validateState(customer.phone, customer.state)) {
-        // TODO implementar lógica pra aumentar o score
+        console.log("ddd do customer diferente do ddd referente a UF do próprio customer");
         score += 15;
-        console.log(score)
     }
 
     if (!validatePhone(customer.phone)) {
-        // TODO implementar lógica pra aumentar o score
+        console.log("telefone invalido");
         score += 15;
-        console.log(score)
     }
 
     if (!validatePayment(dataTransaction.paid_at)) {
         console.log("data de pagamento maior que data atual");
         score += 20;
     }
-
-    // Verificar se valor da transação é maior que zero
 
     // Verifica se o cliente é maior de idade
     if (!validateBirthDate(customer.birth_date)) {
@@ -66,18 +59,17 @@ function validateTransaction(dataTransaction) {
 }
 
 // Comparar o DDD do phone do cliente com o UF do state da localização da transação
-function validateState(phoneCustomer, locationTransaction) {
-
-    const ddd = phoneCustomer.slice(0, 2)
+function validateState(phoneCustomer, state) {
+    const ddd = phoneCustomer.slice(0, 2);
 
     // descobrir state pelo ddd
-    const state = findStateByDDD(ddd);
+    const uf = findStateByDDD(ddd);
 
-    //comparar state do ddd com state da transação
-    if (state === locationTransaction) {
-        return true
+    // comparar state do ddd com state da transação
+    if (uf === state) {
+        return true;
     } else {
-        return false
+        return false;
     }
 }
 
@@ -86,8 +78,7 @@ function findStateByDDD(ddd) {
         stateByDDD.hasOwnProperty(state);
         {
             if (state === ddd) {
-                stateByDDD[state] = stateByDDD[state] + '/BR';
-                return stateByDDD[state];
+                return stateByDDD[state] + '/BR';
             }
         }
     }
@@ -96,12 +87,10 @@ function findStateByDDD(ddd) {
 // Valida se o número do telefone é válido
 function validatePhone(phoneCustomer) {
     if (/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}/g.test(phoneCustomer)) {
-        console.log('valido')
-        return true
+        return true;
     }
     else {
-        console.log('invalido')
-        return false
+        return false;
     }
 }
 
@@ -121,16 +110,15 @@ function validateBirthDate(birthDateCustomer) {
     const ageCustomer = calcAge(birthDateCustomer);
 
     if (ageCustomer >= 18) {
-        return true
+        return true;
     } else {
-        return false
+        return false;
     }
 }
 
 calcAge = (dateString) => {
     let birthday = +new Date(dateString);
     let age = ((Date.now() - birthday) / (31557600000));
-    console.log(age);
     return age;
 }
 
