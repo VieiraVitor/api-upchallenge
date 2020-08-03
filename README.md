@@ -68,10 +68,10 @@ Espera-se como retorno da requisição:
 <li>Nome do cliente cadastrado diferente do nome no cartão utilizado;</li>
 <li>Estado(UF) cadastrada pelo cliente diferente do Estado(UF) onde foi realizada a transação;</li>
 <li>Número DDD do telefone do cliente diferente do DDD do Estado(UF) onde foi realizada a transação;</li>
-<li>Número DDD do telefone do cliente diferente do DDD do Estado(UF) cadastrado pelo cliente;<li>
-<li>Número de telefone do cliente é inválido;<li>
-<li>Data de pagamento informada na transação é maior do que a data da realização da transação;<li>
-<li>Cliente tem idade menor que 18 anos;<li>
+<li>Número DDD do telefone do cliente diferente do DDD do Estado(UF) cadastrado pelo cliente;</li>
+<li>Número de telefone do cliente é inválido;</li>
+<li>Data de pagamento informada na transação é maior do que a data da realização da transação;</li>
+<li>Cliente tem idade menor que 18 anos;</li>
 
 # Executar o projeto em ambiente local
 
@@ -103,4 +103,14 @@ npm start
 <i>A porta que foi definida para o servidor é a **4000**, acessando http://localhost:4000/ é possível visualizar o resultado de uma requisição GET com finalidade de teste.</i>
 
 <h2>Testes com Postman</h2>
-Para testar as requisições via POST das transações, utilizarei como exemplo o software Postman.
+Para testar as requisições HTTP via POST, utilizarei como exemplo o software Postman.
+
+O path do endpoint da API que realiza a validação das transações(que recebe a requisição POST), está em /validate
+Endereço completo:
+~~~
+http://localhost:4000/validate
+~~~
+
+Abaixo há um gif mostrando o passo a passo realizando o teste via Postman.
+
+![](/assets/images/postman-test.gif)
