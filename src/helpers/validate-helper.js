@@ -1,6 +1,6 @@
 'use strict';
 
-const stateByDDD = require('./state-helper')
+const stateByDDD = require('../../assets/js/states');
 
 const resultTransactions = function validateTransactions(dataTransactions) {
     let results = [];
@@ -9,7 +9,7 @@ const resultTransactions = function validateTransactions(dataTransactions) {
 
     for (let transaction in dataTransactions) {
         scoreTransaction = validateTransaction(dataTransactions[transaction]);
-        idTransaction = dataTransactions[transaction].customer.id;
+        idTransaction = dataTransactions[transaction].id;
         results.push({
             id: idTransaction,
             score: scoreTransaction
@@ -22,6 +22,7 @@ const resultTransactions = function validateTransactions(dataTransactions) {
 function validateTransaction(dataTransaction) {
     const customer = dataTransaction.customer
     let score = 0;
+    
     if (customer.name !== dataTransaction.card_hold_name) {
         console.log("nome diferente do cartão");
         score += 22;
