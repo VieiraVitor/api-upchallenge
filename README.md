@@ -97,6 +97,8 @@ git clone https://github.com/VieiraVitor/api-upchallenge.git
 Após as instalações necessárias e a realização do download(clonagem) do repositório, é necessário acessar o diretório raiz do repositório baixado e executar o seguinte comando no terminal:
 
 ~~~
+npm install
+
 npm start
 ~~~
 

@@ -24,41 +24,34 @@ function validateTransaction(dataTransaction) {
     let score = 0;
     
     if (customer.name !== dataTransaction.card_hold_name) {
-        console.log("nome diferente do cartão");
         score += 22;
     }
 
     // Validar ip location da transação e state do customer
     if (customer.state !== dataTransaction.ip_location) {
-        console.log("state do customer diferente da localização da transação");
         score += 13;
     }
 
     // Valida o DDD do customer com o UF do ip_location da transação
     if (!validateState(customer.phone, dataTransaction.ip_location)) {
-        console.log("ddd do customer diferente do ddd referente a UF da localização da transação");
         score += 10;
     }
 
     // Valida o DDD do customer com o UF do state do próprio customer
     if (!validateState(customer.phone, customer.state)) {
-        console.log("ddd do customer diferente do ddd referente a UF do próprio customer");
         score += 15;
     }
 
     if (!validatePhone(customer.phone)) {
-        console.log("telefone invalido");
         score += 15;
     }
 
     if (!validatePayment(dataTransaction.paid_at)) {
-        console.log("data de pagamento maior que data atual");
         score += 20;
     }
 
     // Verifica se o cliente é maior de idade
     if (!validateBirthDate(customer.birth_date)) {
-        console.log('menor que 18 anos');
         score += 5;
     }
 
