@@ -2,10 +2,15 @@
 
 const stateByDDD = require('../../assets/js/states');
 
-const resultTransactions = function validateTransactions(dataTransactions) {
+// Recebe as transações e inicia a validação
+const resultTransactions = function transactions(dataTransactions) {
     let results = [];
     let scoreTransaction = 0;
     let idTransaction = '';
+
+    if (!Array.isArray(dataTransactions)){
+        return false;
+    }
 
     for (let transaction in dataTransactions) {
         scoreTransaction = validateTransaction(dataTransactions[transaction]);
@@ -19,6 +24,7 @@ const resultTransactions = function validateTransactions(dataTransactions) {
     return results;
 }
 
+// Verifica cada transação recebida e atribui o score
 function validateTransaction(dataTransaction) {
     const customer = dataTransaction.customer
     let score = 0;
@@ -27,17 +33,14 @@ function validateTransaction(dataTransaction) {
         score += 22;
     }
 
-    // Validar ip location da transação e state do customer
     if (customer.state !== dataTransaction.ip_location) {
         score += 13;
     }
 
-    // Valida o DDD do customer com o UF do ip_location da transação
     if (!validateState(customer.phone, dataTransaction.ip_location)) {
         score += 10;
     }
 
-    // Valida o DDD do customer com o UF do state do próprio customer
     if (!validateState(customer.phone, customer.state)) {
         score += 15;
     }
@@ -50,7 +53,6 @@ function validateTransaction(dataTransaction) {
         score += 20;
     }
 
-    // Verifica se o cliente é maior de idade
     if (!validateBirthDate(customer.birth_date)) {
         score += 5;
     }
@@ -60,14 +62,12 @@ function validateTransaction(dataTransaction) {
     return score;
 }
 
-// Comparar o DDD do phone do cliente com o UF do state da localização da transação
+// Valida o estado do customer ou localização da transação, de acordo com o DDD
 function validateState(phoneCustomer, state) {
     const ddd = phoneCustomer.slice(0, 2);
 
-    // descobrir state pelo ddd
     const uf = findStateByDDD(ddd);
 
-    // comparar state do ddd com state da transação
     if (uf === state) {
         return true;
     } else {
@@ -75,6 +75,7 @@ function validateState(phoneCustomer, state) {
     }
 }
 
+//  Retorna o estado(UF) de acordo com o DDD
 function findStateByDDD(ddd) {
     for (let state in stateByDDD) {
         stateByDDD.hasOwnProperty(state);
@@ -86,7 +87,7 @@ function findStateByDDD(ddd) {
     }
 }
 
-// Valida se o número do telefone é válido
+// Verifica se o telefone é válido
 function validatePhone(phoneCustomer) {
     if (/^\(?[1-9]{2}\)? ?(?:[2-8]|9[1-9])[0-9]{3}\-?[0-9]{4}/g.test(phoneCustomer)) {
         return true;
@@ -96,7 +97,7 @@ function validatePhone(phoneCustomer) {
     }
 }
 
-// Valida se o pagamento não está em uma data futura
+// Verifica se o pagamento não está com data futura
 function validatePayment(paidAtTransaction) {
     let dateNow = new Date().toISOString();
     dateNow = dateNow.replace(/T/, ' ').replace(/\..+/, '');
@@ -108,6 +109,7 @@ function validatePayment(paidAtTransaction) {
     }
 }
 
+// Verifica a idade
 function validateBirthDate(birthDateCustomer) {
     const ageCustomer = calcAge(birthDateCustomer);
 
@@ -118,6 +120,7 @@ function validateBirthDate(birthDateCustomer) {
     }
 }
 
+// Retorna a idade de acordo com a data de aniversário
 function calcAge(dateString) {
     let birthday = +new Date(dateString);
     let age = ((Date.now() - birthday) / (31557600000));
