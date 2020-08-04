@@ -120,6 +120,25 @@ O path do endpoint da API que realiza a validação das transações (que recebe
 http://localhost:4000/validate
 ~~~
 
-Abaixo há um gif mostrando o passo a passo do teste via Postman.
+<h4>Utilizando</h4>
+
+Com o Postman aberto, deve-se alterar o método da requisição para POST e inserir a URL de requisição ao lado.
+
+![](/assets/images/postman-1.png)
+
+Na aba 'Header', verificar se a key 'Content-Type' existe e se está com o value = 'application/json'.
+Caso não, crie a key e insira esse value.
+
+![](/assets/images/postman-2.png)
+
+Na aba 'Body' envia-se o corpo da requisição, selecione o método 'raw' e insira o array de transações, clique em 'Send' para enviar a requisição.
+
+![](/assets/images/postman-3.png)
+
+A resposta será informada logo abaixo, com o array de retorno e o Status da transação, junto do tempo gasto na requisição.
+
+![](/assets/images/postman-4.png)
+
+Abaixo há um gif mostrando o passo a passo do teste via Postman:
 
 ![](/assets/images/postman-test.gif)
