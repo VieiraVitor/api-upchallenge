@@ -85,13 +85,10 @@ sudo apt install nodejs npm
 ~~~~
 
 <h4>Instalar Postman</h4>
-<p>Instalação do software:</p>
-https://www.postman.com/downloads/
 
-<br>
-<p>Extensão do Google Chrome:</p>
+[Instalação do software](https://www.postman.com/downloads/)
 
-[Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=pt-BR)
+[Extensão do Google Chrome](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=pt-BR)
 
 <h2>Clonar o repositório</h2>
 
