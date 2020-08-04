@@ -1,15 +1,15 @@
 #  API Anti-Fraude UpChallenge
 # Sobre o Projeto
 A ideia do projeto é:
-<p>Desenvolver uma API que avalia transações de um e-commerce e retorna um *score* de 0 a 100 de risco, sendo 0 (sem indícios de fraude) e 100 (com máximo risco de fraude).</p>
+<p>Desenvolver uma API que avalia transações de um e-commerce e retorna um <b>score</b> de 0 a 100 de risco, sendo 0 (sem indícios de fraude) e 100 (com máximo risco de fraude).</p>
 
 # Motivo
-O motivo do projeto é participar do desafio UpChallenge e aprimorar meus conhecimentos em desenvolvimento backend.
-<p>A linguagem utilizada para desenvolver essa API, foi o JavaScript, através do interpretador Node.js. Essas escolhas escolhas foram devido a familiaridade e conhecimento prévio do JavaScript, mesmo não tendo muito conhecimento com o backend em Node.js.</p><p>No geral foi uma experiência interessante e satisfatória estudar e aprender mais sobre a criação de uma API com essas tecnologias.</p>
+O motivo do projeto é participar do desafio UpChallenge e aprimorar meus conhecimentos em desenvolvimento back-end.
+<p>A linguagem utilizada para desenvolver essa API, foi o JavaScript, através do interpretador Node.js. Fiz essa escolha devido a familiaridade e conhecimento prévio do JavaScript em front-end, e mesmo não tendo muito conhecimento com o backend em Node.js, tive uma boa curva de aprendizado para elaboração desse desafio.</p><p>No geral foi uma experiência interessante e satisfatória estudar e aprender mais sobre a criação de uma API com essas tecnologias.</p>
 
 # Descrição
 
-Essa **API** tem um **endpoint** que recebe os dados via **POST**, esses dados devem estar em um array contendo as transações em formato JSON, e assim, o endpoint retorna um novo array no mesmo formato, porém, contendo somente a chave da transação (ID) e o ***score*** resultante.
+Essa **API** tem um **endpoint** que recebe os dados via **POST**, esses dados devem estar em um array contendo as transações em formato JSON, e assim, o endpoint retorna um novo array no mesmo formato, porém, contendo somente a chave da transação (ID) e o **score** resultante.
 
 Exemplo:
 
@@ -64,7 +64,7 @@ Espera-se como retorno da requisição:
 ~~~
 
 # Funcionalidades
-<p>Verificar em uma ou mais transações, o risco de fraude nessas transações através de um indicador, o **score**, que pode variar de 0 até 100, de acordo com as seguintes situações:<p>
+<p>Verificar em uma ou mais transações, o risco de fraude nessas transações através de um indicador, o <b>score</b>, que pode aumentar de 0 até 100, de acordo com as seguintes situações:<p>
 <li>Nome do cliente cadastrado diferente do nome no cartão utilizado;</li>
 <li>Estado(UF) cadastrada pelo cliente diferente do Estado(UF) onde foi realizada a transação;</li>
 <li>Número DDD do telefone do cliente diferente do DDD do Estado(UF) onde foi realizada a transação;</li>
@@ -85,7 +85,13 @@ sudo apt install nodejs npm
 ~~~~
 
 <h4>Instalar Postman</h4>
+<p>Instalação do software:</p>
 https://www.postman.com/downloads/
+
+<br>
+<p>Extensão do Google Chrome:</p>
+
+[Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop?hl=pt-BR)
 
 <h2>Clonar o repositório</h2>
 
@@ -107,12 +113,13 @@ npm start
 <h2>Testes com Postman</h2>
 Para testar as requisições HTTP via POST, utilizarei como exemplo o software Postman.
 
-O path do endpoint da API que realiza a validação das transações(que recebe a requisição POST), está em /validate
-Endereço completo:
+O path do endpoint da API que realiza a validação das transações (que recebe a requisição POST), está em /validate
+<p>Endereço completo:</p>
+
 ~~~
 http://localhost:4000/validate
 ~~~
 
-Abaixo há um gif mostrando o passo a passo realizando o teste via Postman.
+Abaixo há um gif mostrando o passo a passo do teste via Postman.
 
 ![](/assets/images/postman-test.gif)
